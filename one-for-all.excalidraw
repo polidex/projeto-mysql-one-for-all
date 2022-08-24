@@ -1,7 +1,7 @@
 {
   "type": "excalidraw",
   "version": 2,
-  "source": "https://excalidraw.com",
+  "source": "https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor",
   "elements": [
     {
       "type": "rectangle",
@@ -521,8 +521,8 @@
     },
     {
       "type": "text",
-      "version": 364,
-      "versionNonce": 859719921,
+      "version": 366,
+      "versionNonce": 1977068427,
       "isDeleted": false,
       "id": "GwP8ZjND_MQNTUdLvwv50",
       "fillStyle": "hachure",
@@ -536,27 +536,27 @@
       "strokeColor": "#000000",
       "backgroundColor": "transparent",
       "width": 199,
-      "height": 96,
+      "height": 72,
       "seed": 1419237785,
       "groupIds": [],
       "strokeSharpness": "round",
       "boundElements": [],
-      "updated": 1661181886227,
+      "updated": 1661353730566,
       "link": null,
       "locked": false,
       "fontSize": 20,
       "fontFamily": 3,
-      "text": "-seguindo_id\n-usuario_id\n-artista_seguido \n(artista_id)",
-      "baseline": 91,
+      "text": "-usuario_id\n-artista_seguido \n(artista_id)",
+      "baseline": 67,
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "-seguindo_id\n-usuario_id\n-artista_seguido \n(artista_id)"
+      "originalText": "-usuario_id\n-artista_seguido \n(artista_id)"
     },
     {
       "type": "text",
-      "version": 437,
-      "versionNonce": 1969688959,
+      "version": 440,
+      "versionNonce": 475786277,
       "isDeleted": false,
       "id": "yyMhieAgIJL-X4YmzIzwC",
       "fillStyle": "hachure",
@@ -570,7 +570,7 @@
       "strokeColor": "#000000",
       "backgroundColor": "transparent",
       "width": 234,
-      "height": 120,
+      "height": 96,
       "seed": 1139755033,
       "groupIds": [],
       "strokeSharpness": "round",
@@ -584,17 +584,17 @@
           "type": "arrow"
         }
       ],
-      "updated": 1661181871842,
+      "updated": 1661353743972,
       "link": null,
       "locked": false,
       "fontSize": 20,
       "fontFamily": 3,
-      "text": "-historico_id\n-usuario_id\n-cancao_reproduzida \n(cancoes_id)\n-data_reproducao",
-      "baseline": 115,
+      "text": "-usuario_id\n-cancao_reproduzida \n(cancoes_id)\n-data_reproducao",
+      "baseline": 91,
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "-historico_id\n-usuario_id\n-cancao_reproduzida \n(cancoes_id)\n-data_reproducao"
+      "originalText": "-usuario_id\n-cancao_reproduzida \n(cancoes_id)\n-data_reproducao"
     },
     {
       "type": "rectangle",
@@ -741,8 +741,8 @@
     },
     {
       "type": "arrow",
-      "version": 274,
-      "versionNonce": 1164708337,
+      "version": 277,
+      "versionNonce": 1489245355,
       "isDeleted": false,
       "id": "1w1ZAsiv54yTIUGgZS-Yr",
       "fillStyle": "hachure",
@@ -755,13 +755,13 @@
       "y": 980,
       "strokeColor": "#862e9c",
       "backgroundColor": "transparent",
-      "width": 17.974688435930148,
-      "height": 180.11270924907467,
+      "width": 19.37353801863219,
+      "height": 180.01966552508975,
       "seed": 652598969,
       "groupIds": [],
       "strokeSharpness": "round",
       "boundElements": [],
-      "updated": 1661181871843,
+      "updated": 1661353743972,
       "link": null,
       "locked": false,
       "startBinding": null,
@@ -779,8 +779,8 @@
           0
         ],
         [
-          17.974688435930148,
-          180.11270924907467
+          19.37353801863219,
+          180.01966552508975
         ]
       ]
     },
