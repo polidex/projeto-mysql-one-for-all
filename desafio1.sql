@@ -5,7 +5,7 @@ DROP DATABASE IF EXISTS SpotifyClone;
   CREATE TABLE SpotifyClone.planos(
       plano_id INT PRIMARY KEY AUTO_INCREMENT UNIQUE,
       plano VARCHAR(10) NOT NULL,
-      preco DOUBLE(3) NOT NULL
+      preco DECIMAL(3,2) NOT NULL
   ) engine = InnoDB;
 
   CREATE TABLE SpotifyClone.artistas(
@@ -18,7 +18,7 @@ DROP DATABASE IF EXISTS SpotifyClone;
       titulo_album VARCHAR(20) NOT NULL,
       artista_id INT NOT NULL,
       ano_lancamento YEAR,
-      FOREIGN KEY (artista_id) REFERENCES artistas(artista_id)
+      FOREIGN KEY (artista_id) REFERENCES SpotifyClone.artistas(artista_id)
   ) engine = InnoDB;
 
   CREATE TABLE SpotifyClone.cancoes(
@@ -26,27 +26,7 @@ DROP DATABASE IF EXISTS SpotifyClone;
       titulo_cancao VARCHAR(20) NOT NULL,
       duracao INT NOT NULL,
       album_id INT NOT NULL,
-      artista_id INT NOT NULL,
-      FOREIGN KEY (album_id) REFERENCES albums(album_id),
-      FOREIGN KEY (artista_id) REFERENCES artistas(artista_id)
-  ) engine = InnoDB;
-
-  CREATE TABLE SpotifyClone.seguindo(
-      seguindo_id INT PRIMARY KEY AUTO_INCREMENT UNIQUE,
-      usuario_id INT NOT NULL,
-      artista_seguido INT,
-      CONSTRAINT PRIMARY KEY (usuario_id, artista_seguido),
-      FOREIGN KEY (usuario_id) REFERENCES usuarios(usuario_id),
-      FOREIGN KEY (artista_seguido) REFERENCES artistas(artista_id)
-  ) engine = InnoDB;
-
-  CREATE TABLE SpotifyClone.historico_reproducao(
-      hitorico_id INT PRIMARY KEY AUTO_INCREMENT UNIQUE,
-      usuario_id INT NOT NULL,
-      cancao_reproduzida INT NOT NULL,
-      data_reproducao TIMESTAMP NOT NULL,
-      FOREIGN KEY (usuario_id) REFERENCES usuarios(usuario_id),
-      FOREIGN KEY (cancao_reproduzida) REFERENCES cancoes(cancao_id)
+      FOREIGN KEY (album_id) REFERENCES SpotifyClone.albums(album_id)
   ) engine = InnoDB;
 
   CREATE TABLE SpotifyClone.usuarios(
@@ -54,25 +34,44 @@ DROP DATABASE IF EXISTS SpotifyClone;
       nome_usuario VARCHAR(50) NOT NULL,
       idade INT NOT NULL,
       plano_id INT NOT NULL,
-      data_assinatura DATE NOT NULL,
-      FOREIGN KEY (plano_id) REFERENCES planos(plano_id)
+      data_assinatura DATE NOT NULL DEFAULT(NOW()),
+      FOREIGN KEY (plano_id) REFERENCES SpotifyClone.planos(plano_id)
+  ) engine = InnoDB;
+
+  CREATE TABLE SpotifyClone.seguindo(
+      seguindo_id INT PRIMARY KEY AUTO_INCREMENT UNIQUE,
+      usuario_id INT NOT NULL,
+      artista_seguido INT,
+      CONSTRAINT PRIMARY KEY (usuario_id, artista_seguido),
+      FOREIGN KEY (usuario_id) REFERENCES SpotifyClone.usuarios(usuario_id),
+      FOREIGN KEY (artista_seguido) REFERENCES SpotifyClone.artistas(artista_id)
+  ) engine = InnoDB;
+
+  CREATE TABLE SpotifyClone.historico_reproducao(
+      hitorico_id INT PRIMARY KEY AUTO_INCREMENT UNIQUE,
+      usuario_id INT NOT NULL,
+      cancao_reproduzida INT NOT NULL,
+      data_reproducao TIMESTAMP NOT NULL,
+      CONSTRAINT PRIMARY KEY (usuario_id, cancao_reproduzida),
+      FOREIGN KEY (usuario_id) REFERENCES usuarios(usuario_id),
+      FOREIGN KEY (cancao_reproduzida) REFERENCES SpotifyClone.cancoes(cancao_id)
   ) engine = InnoDB;
 
   INSERT INTO SpotifyClone.planos (plano, preco)
   VALUES
-    ('Gratuito', '0.00'), --1
-    ('Universitário', '5.99'), --2
-    ('Pessoal', '6.99'), --3
-    ('Familiar', '7.99'); --4
+    ('Gratuito', '0.00'), 
+    ('Universitário', '5.99'), 
+    ('Pessoal', '6.99'), 
+    ('Familiar', '7.99'); 
 
   INSERT INTO SpotifyClone.artistas (nome_artista)
   VALUES
-    ('Beyoncé'), --1
-    ('Queen'), --2
-    ('Elis Regina'), --3
-    ('Baco Exu do Blues'), --4
-    ('Blind Guardian'), --5
-    ('Nina Simone'); --6
+    ('Beyoncé'), 
+    ('Queen'), 
+    ('Elis Regina'), 
+    ('Baco Exu do Blues'), 
+    ('Blind Guardian'), 
+    ('Nina Simone'); 
     
   INSERT INTO SpotifyClone.albums (titulo_album, artista_id, ano_lancamento)
   VALUES
@@ -85,18 +84,31 @@ DROP DATABASE IF EXISTS SpotifyClone;
     ('Somewhere Far Beyond', 5, 2007),
     ('I Put A Speel On You', 6, 2012);
 
-  INSERT INTO SpotifyClone.cancoes (titulo_cancao, duracao, album_id, artista_id)
+  INSERT INTO SpotifyClone.cancoes (titulo_cancao, artista_id, duracao, album_id)
   VALUES
-    ('BREAK MY SOUL', 1, 279), --1
-    ("VIRGO'S GROOVE", 1, 369), --2
-    ('ALIEN SUPERSTAR', 1, 116), --3
-    ("Don't Stop Me Now", 2, 203), --4
-    ('Under Pressure', 2, 152), --5
-    ('Como Nossos Pais', 3, 105), --6
-    ('O Medo de Amar é o Medo de Ser Livre', 3, 207), --7
-    ('Samba em Paris', 4, 267), --8
-    ("The Bard's Song", 5, 244), --9
-    ('Feeling Good', 6, 100); --10
+    ('BREAK MY SOUL', 1, 279, 1), 
+    ("VIRGO'S GROOVE", 1, 369, 1), 
+    ('ALIEN SUPERSTAR', 1, 116, 1), 
+    ("Don't Stop Me Now", 2, 203, 2), 
+    ('Under Pressure', 2, 152, 3), 
+    ('Como Nossos Pais', 3, 105, 4), 
+    ('O Medo de Amar é o Medo de Ser Livre', 3, 207, 5), 
+    ('Samba em Paris', 4, 267, 6), 
+    ("The Bard's Song", 5, 244, 7), 
+    ('Feeling Good', 6, 100, 8); 0
+
+  INSERT INTO SpotifyClone.usuarios (nome_usuario, idade, plano_id, data_assinatura)
+  VALUES
+    ('Barbara Liskov', 82, 1, '2019-10-20'),
+    ('Robert Cecil Martin', 58, 1, '2017-01-06'),
+    ('Ada Lovelace', 37, 4, '2017-12-30'),
+    ('Martin Fowler', 46, 4, '2017-01-17'),
+    ('Sandi Metz', 58, 4, '2018-04-29'),
+    ('Paulo Freire', 19, 2, '2018-02-14'),
+    ('Bell Hooks', 26, 2, '2018-01-05'),
+    ('Christopher Alexander', 85, 3, '2019-06-05'),
+    ('Judith Butler', 45, 3, '2020-05-13'),
+    ('Jorge Amado', 58, 3, '2017-02-17');
 
   INSERT INTO SpotifyClone.seguindo (usuario_id, artista_seguido)
   VALUES
@@ -135,16 +147,3 @@ DROP DATABASE IF EXISTS SpotifyClone;
     (8, 4, '2012-03-17 14:56:41'),
     (9, 9, '2022-02-24 21:14:22'),
     (10, 3, '2015-12-13 08:30:22');
-
-  INSERT INTO SpotifyClone.usuarios (nome_usuario, idade, plano_id, data_assinatura)
-  VALUES
-    ('Barbara Liskov', 82, 1, '2019-10-20'),
-    ('Robert Cecil Martin', 58, 1, '2017-01-06'),
-    ('Ada Lovelace', 37, 4, '2017-12-30'),
-    ('Martin Fowler', 46, 4, '2017-01-17'),
-    ('Sandi Metz', 58, 4, '2018-04-29'),
-    ('Paulo Freire', 19, 2, '2018-02-14'),
-    ('Bell Hooks', 26, 2, '2018-01-05'),
-    ('Christopher Alexander', 85, 3, '2019-06-05'),
-    ('Judith Butler', 45, 3, '2020-05-13'),
-    ('Jorge Amado', 58, 3, '2017-02-17');
