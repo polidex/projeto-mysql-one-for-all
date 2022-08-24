@@ -42,11 +42,11 @@ DROP DATABASE IF EXISTS SpotifyClone;
     ('Renaissance', 1, 2022),
     ('Jazz', 2, 1978),
     ('Hot Space', 2, 1982),
-    ('Falso Brilante', 3, 1998),
+    ('Falso Brilhante', 3, 1998),
     ('Vento de Maio', 3, 2001),
     ('QVVJFA?', 4, 2003),
     ('Somewhere Far Beyond', 5, 2007),
-    ('I Put A Speel On You', 6, 2012);
+    ('I Put A Spell On You', 6, 2012);
 
   CREATE TABLE SpotifyClone.cancoes(
       cancao_id INT PRIMARY KEY AUTO_INCREMENT,
